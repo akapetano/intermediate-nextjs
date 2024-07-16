@@ -10,7 +10,7 @@ export const getAttendeesCountForDashboard = memoize(
     await delay()
     const counts = await db
       .select({
-        totalAttendees: sql`count(distinct ${attendees.id})`,
+        totalAttendees: sql<number>`count(distinct ${attendees.id})`,
       })
       .from(events)
       .leftJoin(rsvps, eq(rsvps.eventId, events.id))
@@ -20,6 +20,7 @@ export const getAttendeesCountForDashboard = memoize(
       .execute()
 
     const total = counts.reduce((acc, count) => acc + count.totalAttendees, 0)
+    console.log({ counts, total })
     return total
   },
   {

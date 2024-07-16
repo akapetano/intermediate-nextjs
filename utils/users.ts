@@ -1,4 +1,5 @@
 import 'server-only'
+
 import { COOKIE_NAME } from './constants'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
@@ -7,10 +8,14 @@ import { cache } from 'react'
 
 export const getCurrentUser = cache(async () => {
   const token = cookies().get(COOKIE_NAME)
-  if (!token) redirect('/signin')
+  if (!token) {
+    redirect('/signin')
+  }
 
   const user = await getUserFromToken(token)
-  if (!user) redirect('/signin')
+  if (!user) {
+    redirect('/signin')
+  }
 
   return user
 })
