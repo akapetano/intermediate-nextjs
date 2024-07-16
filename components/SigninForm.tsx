@@ -36,7 +36,7 @@ const SigninForm = () => {
         type="password"
         placeholder="Password"
       />
-      <Submit label={'signin'} />
+      <Submit label={'Sign In'} />
       <div>
         <Link href="/signup">{`Don't have an account?`}</Link>
       </div>
